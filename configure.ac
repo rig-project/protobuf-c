@@ -46,6 +46,8 @@ AC_ARG_ENABLE(
 )
 AM_CONDITIONAL([BUILD_RPC], [test "x$enable_rpc" = "xyes"])
 
+gl_VALGRIND_TESTS
+
 AC_C_BIGENDIAN
 
 AC_OUTPUT

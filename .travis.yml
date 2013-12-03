@@ -9,4 +9,7 @@ install:
 script:
     - ./autogen.sh
     - ./configure && make distcheck && make clean
-    - ./configure --enable-rpc && make distcheck DISTCHECK_CONFIGURE_FLAGS="--enable-rpc" && make clean
+    - ./configure --enable-rpc && make distcheck DISTCHECK_CONFIGURE_FLAGS="--enable-rpc"
+      && make clean
+    - ./configure --enable-rpc --enable-valgrind-tests && make distcheck
+      DISTCHECK_CONFIGURE_FLAGS="--enable-rpc --enable-valgrind-tests" && make clean
