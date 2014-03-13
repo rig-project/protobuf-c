@@ -17,7 +17,7 @@ AM_CPPFLAGS = \
 	-I${top_builddir} \
 	-I${top_srcdir}
 AM_CFLAGS = ${my_CFLAGS}
-AM_LDFLAGS =
+AM_LDFLAGS = $(EXTRA_LDFLAGS)
 
 #
 # libprotobuf-c

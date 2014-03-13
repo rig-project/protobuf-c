@@ -48,6 +48,10 @@ AM_CONDITIONAL([BUILD_RPC], [test "x$enable_rpc" = "xyes"])
 
 AC_C_BIGENDIAN
 
+EXTRA_LDFLAGS=
+AC_CHECK_FUNC(pthread_once, [], [EXTRA_LDFLAGS+="-lpthread "])
+AC_SUBST([EXTRA_LDFLAGS])
+
 AC_OUTPUT
 AC_MSG_RESULT([
     $PACKAGE $VERSION
@@ -56,7 +60,7 @@ AC_MSG_RESULT([
         CFLAGS:                 ${CFLAGS}
         CXX:                    ${CXX}
         CXXFLAGS:               ${CXXFLAGS}
-        LDFLAGS:                ${LDFLAGS}
+        LDFLAGS:                ${EXTRA_LDFLAGS}${LDFLAGS}
         LIBS:                   ${LIBS}
 
         prefix:                 ${prefix}
