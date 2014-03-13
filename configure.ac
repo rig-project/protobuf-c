@@ -36,15 +36,27 @@ else
     AC_MSG_ERROR([pkg-config is required!])
 fi
 
-PKG_CHECK_MODULES([protobuf], [protobuf])
-AC_LANG_PUSH([C++])
-AC_PATH_PROG(PROTOC, protoc)
-
 AC_ARG_ENABLE(
     [rpc],
     AS_HELP_STRING([--enable-rpc], [Enable building the protobuf-c rpc library])
 )
 AM_CONDITIONAL([BUILD_RPC], [test "x$enable_rpc" = "xyes"])
+
+AC_ARG_ENABLE(
+    [protoc-c],
+    AS_HELP_STRING([--disable-protoc-c], [Enable building the protoc-c program]),
+    [],
+    [ enable_protoc_c=yes ]
+)
+AS_IF([test "x$enable_protoc_c" = "xyes"],
+      [
+        PKG_CHECK_MODULES([protobuf], [protobuf])
+        AC_LANG_PUSH([C++])
+        AC_PATH_PROG(PROTOC, protoc)
+	protoc_ver=$($PROTOC --version)
+      ],
+      [protoc_ver="n/a"])
+AM_CONDITIONAL([BUILD_PROTOC_C], [test "x$enable_protoc_c" = "xyes"])
 
 AC_C_BIGENDIAN
 
@@ -70,5 +82,7 @@ AC_MSG_RESULT([
         pkgconfigdir:           ${pkgconfigdir}
 
         bigendian:              ${ac_cv_c_bigendian}
-        protobuf version:       $($PROTOC --version)
+        protobuf version:       ${protoc_ver}
+
+	build protoc-c:         ${enable_protoc_c}
 ])

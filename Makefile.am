@@ -88,6 +88,7 @@ endif
 # protoc-c
 #
 
+if BUILD_PROTOC_C
 bin_PROGRAMS += protoc-c/protoc-c
 protoc_c_protoc_c_SOURCES = \
 	protoc-c/c_bytes_field.cc \
@@ -184,6 +185,7 @@ EXTRA_DIST += \
 	t/test-full.proto \
 	t/generated-code2/common-test-arrays.h
 
+
 #
 # protobuf-c-rpc tests
 #
@@ -204,6 +206,8 @@ protobuf_c_rpc_t_test_rpc_LDADD = \
 	protobuf-c-rpc/libprotobuf-c-rpc.la
 
 endif
+
+endif # BUILD_PROTOC_C
 
 #
 #
