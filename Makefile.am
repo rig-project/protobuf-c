@@ -39,10 +39,7 @@ protobuf_c_libprotobuf_c_la_SOURCES = \
 	protobuf-c/protobuf-c.h \
 	protobuf-c/protobuf-c-private.h
 
-protobuf_c_libprotobuf_c_la_LDFLAGS = $(AM_LDFLAGS) \
-	-version-info $(LIBPROTOBUF_C_CURRENT):$(LIBPROTOBUF_C_REVISION):$(LIBPROTOBUF_C_AGE) \
-	-export-symbols-regex "^(protobuf_c_[a-z].*)" \
-	-no-undefined
+protobuf_c_libprotobuf_c_la_LDFLAGS = $(AM_LDFLAGS)
 
 pkgconfig_DATA += protobuf-c/libprotobuf-c.pc
 CLEANFILES += protobuf-c/libprotobuf-c.pc
